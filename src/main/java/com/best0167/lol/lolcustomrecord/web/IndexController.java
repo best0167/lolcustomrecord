@@ -1,5 +1,6 @@
 package com.best0167.lol.lolcustomrecord.web;
 
+import com.best0167.lol.lolcustomrecord.config.auth.LoginUser;
 import com.best0167.lol.lolcustomrecord.config.auth.dto.SessionUser;
 import com.best0167.lol.lolcustomrecord.domain.posts.Posts;
 import com.best0167.lol.lolcustomrecord.domain.posts.PostsRepository;
@@ -23,22 +24,17 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
-
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
 
         if (user == null) {
             return "index";
         }
-        model.addAttribute("userName", user.getName());
-        return "index";
+        model.addAttribute("user", user);
+        return "loginHome";
     }
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
+
 
     @GetMapping("/posts/save")
     public String addForm(Model model) {
