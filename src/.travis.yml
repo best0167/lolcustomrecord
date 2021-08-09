@@ -15,9 +15,9 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r best0167springboot2-webservice *
+  - zip -r lolcustomrecord *
   - mkdir -p deploy
-  - mv best0167springboot2-webservice.zip deploy/best0167springboot2-webservice.zip
+  - mv lolcustomrecord.zip deploy/lolcustomrecord.zip
 
 deploy:
   - provider: s3
