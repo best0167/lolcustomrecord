@@ -15,7 +15,7 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r lolcustomrecord *
+  - zip -r lolcustomrecord ./*
   - mkdir -p deploy
   - mv lolcustomrecord.zip deploy/lolcustomrecord.zip
 
