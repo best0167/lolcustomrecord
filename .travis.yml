@@ -30,6 +30,16 @@ deploy:
     local_dir: deploy # before_deploy 에서 생성한 디렉토리
     wait-until-deployed: true
 
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: best0167-springboot-build
+    key: best0167springboot2-webservice
+    applcation: best0167springboot2-webservice
+    deployment_grop: best0167springboot2-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+
 # CI 실행 완료 시 메일로 알람
 notifications:
   email:
