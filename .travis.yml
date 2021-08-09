@@ -34,7 +34,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: best0167-springboot-build
-    key: best0167springboot2-webservice
+    key: lolcustomrecord.zip
     applcation: best0167springboot2-webservice
     deployment_grop: best0167springboot2-group
     region: ap-northeast-2
