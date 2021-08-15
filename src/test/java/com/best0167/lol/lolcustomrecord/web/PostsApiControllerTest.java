@@ -13,18 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.net.URI;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -38,6 +36,8 @@ class PostsApiControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    private String baseUrl;
 
     @Autowired
     private PostsRepository postsRepository;
@@ -53,10 +53,12 @@ class PostsApiControllerTest {
                 .webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
+
+        baseUrl = "http://localhost:" + port + "/api/v1/posts";
     }
 
     @AfterEach
-    void tearDown() throws Exception {
+    void tearDown() {
         postsRepository.deleteAll();
     }
 
@@ -73,7 +75,7 @@ class PostsApiControllerTest {
                 .author("author")
                 .build();
 
-        String url = "http://localhost:" + port + "/api/v1/posts";
+        String url = baseUrl;
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.
@@ -110,7 +112,7 @@ class PostsApiControllerTest {
                 .content(expectedContent)
                 .build();
 
-        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
+        String url = baseUrl + "/" + updateId;
 
         HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
@@ -131,19 +133,20 @@ class PostsApiControllerTest {
 
     @Test
     @DisplayName("게시글 삭제")
-    void postDelete() throws Exception {
+    void postDelete() {
         // given
-        Posts savedPosts = postsRepository.save(Posts.builder()
-                .title("title3")
-                .content("content3")
-                .author("author3")
-                .build());
+        long id = 1;
+        URI uri = URI.create(baseUrl + "/" + id);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        HttpEntity<Posts> entity = new HttpEntity<>(httpHeaders);
 
         // when
-        postsRepository.delete(savedPosts);
+        ResponseEntity<Long> responseEntity = restTemplate.exchange(uri, HttpMethod.DELETE, entity, Long.class);
 
         // then
-        assertThat(postsRepository.findAll().isEmpty());
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.FOUND);
+
 
     }
 }
