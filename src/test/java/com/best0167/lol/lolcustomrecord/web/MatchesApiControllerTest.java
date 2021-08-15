@@ -3,29 +3,35 @@ package com.best0167.lol.lolcustomrecord.web;
 import com.best0167.lol.lolcustomrecord.domain.match.Matches;
 import com.best0167.lol.lolcustomrecord.domain.match.MatchesRepository;
 import com.best0167.lol.lolcustomrecord.web.dto.MatchesSaveRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.MatchesUpdateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.*;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Slf4j
 class MatchesApiControllerTest {
 
     @LocalServerPort
@@ -49,18 +55,16 @@ class MatchesApiControllerTest {
         mvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .apply(springSecurity())
-                .addFilter(new CharacterEncodingFilter("UTF-8", true))
                 .build();
 
         baseUrl = "http://localhost:" + port + "/api/matches";
     }
 
-    /* @AfterEach
-    void tearDown() throws Exception {
+    @AfterEach
+    void tearDown() {
         matchesRepository.deleteAll();
-    } */
+    }
 
-    @Order(1)
     @Test
     @WithMockUser(roles = "USER")
     @DisplayName("매치 등록 테스트")
@@ -129,18 +133,56 @@ class MatchesApiControllerTest {
         assertThat(all.get(0).getRedSupportChampion()).isEqualTo("레오나");
     }
 
-/*    @Order(2)
     @Test
     @WithMockUser(roles = "USER")
     @DisplayName("매치 수정 테스트")
     void matchUpdate() throws Exception {
 
-        MatchesUpdateRequestDto requestDto = MatchesUpdateRequestDto.builder()
+        Matches savedMatch = matchesRepository.save(Matches.builder()
+                .season(202101)
+                .day(1)
                 .victoryTeam("B")
-                .redBotChampion("베인")
-                .build();
+                .blueTopNickname("불고기 맛있네")
+                .blueJungleNickname("나는폭풍우다")
+                .blueMidNickname("제발 나를 구해줘")
+                .blueBotNickname("교촌치킨")
+                .blueSupportNickname("보두한")
+                .redTopNickname("팔보산의정기")
+                .redJungleNickname("개고기 맛있네")
+                .redMidNickname("손대현")
+                .redBotNickname("그대의 달이 되길")
+                .redSupportNickname("미소천사 갈리오")
+                .blueTopChampion("케넨")
+                .blueJungleChampion("엘리스")
+                .blueMidChampion("이렐리아")
+                .blueBotChampion("이즈리얼")
+                .blueSupportChampion("파이크")
+                .redTopChampion("비에고")
+                .redJungleChampion("니달리")
+                .redMidChampion("잭스")
+                .redBotChampion("카이사")
+                .redSupportChampion("레오나")
+                .build());
 
-        long updateId = 1L;
+
+        Long updateId = savedMatch.getId();
+
+        String expectedVictoryTeam = "R";
+        String expectedRedBotChampion = "베인";
+
+        MatchesUpdateRequestDto requestDto = MatchesUpdateRequestDto.builder()
+                .victoryTeam(expectedVictoryTeam)
+                .redBotChampion(expectedRedBotChampion)
+                .blueTopChampion("케넨")
+                .blueJungleChampion("엘리스")
+                .blueMidChampion("이렐리아")
+                .blueBotChampion("이즈리얼")
+                .blueSupportChampion("파이크")
+                .redTopChampion("비에고")
+                .redJungleChampion("니달리")
+                .redMidChampion("잭스")
+                .redSupportChampion("레오나")
+                .build();
 
         String url = baseUrl + "/" + updateId;
 
@@ -153,13 +195,57 @@ class MatchesApiControllerTest {
         mvc.perform(put(url)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(requestDto)))
-                .andExpect(status().isOk());
+                        .andExpect(status().isOk());
 
         //then
+        List<Matches> all = matchesRepository.findAll();
+        assertThat(all.get(0).getVictoryTeam()).isEqualTo("R");
+        assertThat(all.get(0).getRedBotChampion()).isEqualTo("베인");
 
-    }*/
+    }
 
+    @Test
+    @WithMockUser(roles = "USER")
+    @DisplayName("매치 삭제 테스트")
+    void matchDelete() {
+        // given
+        Matches savedMatch = matchesRepository.save(Matches.builder()
+                .season(202101)
+                .day(1)
+                .victoryTeam("B")
+                .blueTopNickname("불고기 맛있네")
+                .blueJungleNickname("나는폭풍우다")
+                .blueMidNickname("제발 나를 구해줘")
+                .blueBotNickname("교촌치킨")
+                .blueSupportNickname("보두한")
+                .redTopNickname("팔보산의정기")
+                .redJungleNickname("개고기 맛있네")
+                .redMidNickname("손대현")
+                .redBotNickname("그대의 달이 되길")
+                .redSupportNickname("미소천사 갈리오")
+                .blueTopChampion("케넨")
+                .blueJungleChampion("엘리스")
+                .blueMidChampion("이렐리아")
+                .blueBotChampion("이즈리얼")
+                .blueSupportChampion("파이크")
+                .redTopChampion("비에고")
+                .redJungleChampion("니달리")
+                .redMidChampion("잭스")
+                .redBotChampion("카이사")
+                .redSupportChampion("레오나")
+                .build());
 
+        Long deleteId = savedMatch.getId();
+
+        String url = baseUrl + "/" + deleteId;
+
+        // when
+        matchesRepository.deleteById(deleteId);
+
+        // then
+        List<Matches> all = matchesRepository.findAll();
+        assertThat(matchesRepository.findAll()).isEmpty();
+    }
 
 
 

@@ -22,7 +22,7 @@ public class MatchesApiController {
         return matchesService.update(id, requestDto);
     }
 
-    @GetMapping("/api/matches/{id}")
+    @GetMapping("/matches/{id}")
     public MatchesResponseDto findById(@PathVariable Long id) {
         return matchesService.findById(id);
     }
