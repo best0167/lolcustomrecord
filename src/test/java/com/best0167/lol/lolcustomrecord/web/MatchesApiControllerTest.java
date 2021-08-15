@@ -3,15 +3,12 @@ package com.best0167.lol.lolcustomrecord.web;
 import com.best0167.lol.lolcustomrecord.domain.match.Matches;
 import com.best0167.lol.lolcustomrecord.domain.match.MatchesRepository;
 import com.best0167.lol.lolcustomrecord.web.dto.MatchesSaveRequestDto;
-import com.best0167.lol.lolcustomrecord.web.dto.MatchesUpdateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -25,7 +22,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -133,7 +129,7 @@ class MatchesApiControllerTest {
         assertThat(all.get(0).getRedSupportChampion()).isEqualTo("레오나");
     }
 
-    @Order(2)
+/*    @Order(2)
     @Test
     @WithMockUser(roles = "USER")
     @DisplayName("매치 수정 테스트")
@@ -161,7 +157,7 @@ class MatchesApiControllerTest {
 
         //then
 
-    }
+    }*/
 
 
 
