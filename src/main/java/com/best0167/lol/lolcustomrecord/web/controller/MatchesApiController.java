@@ -1,15 +1,16 @@
-package com.best0167.lol.lolcustomrecord.web;
+package com.best0167.lol.lolcustomrecord.web.controller;
 
 import com.best0167.lol.lolcustomrecord.service.matches.MatchesService;
-import com.best0167.lol.lolcustomrecord.web.dto.MatchesResponseDto;
-import com.best0167.lol.lolcustomrecord.web.dto.MatchesSaveRequestDto;
-import com.best0167.lol.lolcustomrecord.web.dto.MatchesUpdateRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.matches.MatchesResponseDto;
+import com.best0167.lol.lolcustomrecord.web.dto.matches.MatchesSaveRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.matches.MatchesUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
 public class MatchesApiController {
+
     private final MatchesService matchesService;
 
     @PostMapping("/api/matches")

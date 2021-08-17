@@ -1,4 +1,4 @@
-package com.best0167.lol.lolcustomrecord.web;
+package com.best0167.lol.lolcustomrecord.web.controller;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +15,7 @@ public class IndexControllerTest {
 
     @Test
     @DisplayName("메인페이지 로딩")
-    void indexLoading() throws Exception {
+    void indexLoading() {
         // given
         String body = this.restTemplate.getForObject("/", String.class);
 

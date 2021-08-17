@@ -1,4 +1,4 @@
-package com.best0167.lol.lolcustomrecord.web;
+package com.best0167.lol.lolcustomrecord.web.controller;
 
 import com.best0167.lol.lolcustomrecord.web.dto.HelloResponseDto;
 import org.springframework.web.bind.annotation.GetMapping;

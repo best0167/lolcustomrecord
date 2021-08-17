@@ -1,4 +1,4 @@
-package com.best0167.lol.lolcustomrecord.web;
+package com.best0167.lol.lolcustomrecord.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;

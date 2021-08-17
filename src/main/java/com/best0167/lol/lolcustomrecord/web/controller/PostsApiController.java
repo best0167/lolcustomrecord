@@ -1,9 +1,9 @@
-package com.best0167.lol.lolcustomrecord.web;
+package com.best0167.lol.lolcustomrecord.web.controller;
 
 import com.best0167.lol.lolcustomrecord.service.posts.PostsService;
-import com.best0167.lol.lolcustomrecord.web.dto.PostsResponseDto;
-import com.best0167.lol.lolcustomrecord.web.dto.PostsSaveRequestDto;
-import com.best0167.lol.lolcustomrecord.web.dto.PostsUpdateRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.posts.PostsResponseDto;
+import com.best0167.lol.lolcustomrecord.web.dto.posts.PostsSaveRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.posts.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

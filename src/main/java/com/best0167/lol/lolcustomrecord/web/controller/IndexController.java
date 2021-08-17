@@ -1,17 +1,15 @@
-package com.best0167.lol.lolcustomrecord.web;
+package com.best0167.lol.lolcustomrecord.web.controller;
 
 import com.best0167.lol.lolcustomrecord.config.auth.LoginUser;
 import com.best0167.lol.lolcustomrecord.config.auth.dto.SessionUser;
 import com.best0167.lol.lolcustomrecord.domain.posts.Posts;
-import com.best0167.lol.lolcustomrecord.domain.posts.PostsRepository;
 import com.best0167.lol.lolcustomrecord.service.posts.PostsService;
-import com.best0167.lol.lolcustomrecord.web.dto.PostsResponseDto;
+import com.best0167.lol.lolcustomrecord.web.dto.posts.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 

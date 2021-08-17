@@ -1,9 +1,9 @@
-package com.best0167.lol.lolcustomrecord.web;
+package com.best0167.lol.lolcustomrecord.web.controller;
 
 import com.best0167.lol.lolcustomrecord.domain.match.Matches;
 import com.best0167.lol.lolcustomrecord.domain.match.MatchesRepository;
-import com.best0167.lol.lolcustomrecord.web.dto.MatchesSaveRequestDto;
-import com.best0167.lol.lolcustomrecord.web.dto.MatchesUpdateRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.matches.MatchesSaveRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.matches.MatchesUpdateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -66,7 +66,7 @@ class MatchesApiControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "BJ")
     @DisplayName("매치 등록 테스트")
     void matchSave() throws Exception {
         // given
@@ -134,7 +134,7 @@ class MatchesApiControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "BJ")
     @DisplayName("매치 수정 테스트")
     void matchUpdate() throws Exception {
 
@@ -205,9 +205,9 @@ class MatchesApiControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "BJ")
     @DisplayName("매치 삭제 테스트")
-    void matchDelete() {
+    void matchDelete() throws Exception {
         // given
         Matches savedMatch = matchesRepository.save(Matches.builder()
                 .season(202101)
@@ -240,7 +240,8 @@ class MatchesApiControllerTest {
         String url = baseUrl + "/" + deleteId;
 
         // when
-        matchesRepository.deleteById(deleteId);
+        mvc.perform(delete(url))
+                .andExpect(status().isOk());
 
         // then
         List<Matches> all = matchesRepository.findAll();

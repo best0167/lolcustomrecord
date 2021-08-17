@@ -1,9 +1,9 @@
-package com.best0167.lol.lolcustomrecord.web;
+package com.best0167.lol.lolcustomrecord.web.controller;
 
 import com.best0167.lol.lolcustomrecord.domain.posts.Posts;
 import com.best0167.lol.lolcustomrecord.domain.posts.PostsRepository;
-import com.best0167.lol.lolcustomrecord.web.dto.PostsSaveRequestDto;
-import com.best0167.lol.lolcustomrecord.web.dto.PostsUpdateRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.posts.PostsSaveRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.posts.PostsUpdateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

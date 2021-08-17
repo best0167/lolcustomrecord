@@ -2,10 +2,10 @@ package com.best0167.lol.lolcustomrecord.service.matches;
 
 import com.best0167.lol.lolcustomrecord.domain.match.Matches;
 import com.best0167.lol.lolcustomrecord.domain.match.MatchesRepository;
-import com.best0167.lol.lolcustomrecord.web.dto.MatchesListResponseDto;
-import com.best0167.lol.lolcustomrecord.web.dto.MatchesResponseDto;
-import com.best0167.lol.lolcustomrecord.web.dto.MatchesSaveRequestDto;
-import com.best0167.lol.lolcustomrecord.web.dto.MatchesUpdateRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.matches.MatchesListResponseDto;
+import com.best0167.lol.lolcustomrecord.web.dto.matches.MatchesResponseDto;
+import com.best0167.lol.lolcustomrecord.web.dto.matches.MatchesSaveRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.matches.MatchesUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ public class MatchesService {
     @Transactional(readOnly = true)
     public List<MatchesListResponseDto> findAllDesc(Long id) {
         return matchesRepository.findAll(Sort.by(Sort.Direction.DESC, "id")).stream()
-                .map(MatchesListResponseDto::new) // .map(posts -> new PostsListResponseDto(posts))
+                .map(MatchesListResponseDto::new)
                 .collect(Collectors.toList());
     }
 

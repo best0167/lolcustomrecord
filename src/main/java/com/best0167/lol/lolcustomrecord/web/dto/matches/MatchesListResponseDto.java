@@ -1,11 +1,15 @@
-package com.best0167.lol.lolcustomrecord.web.dto;
+package com.best0167.lol.lolcustomrecord.web.dto.matches;
 
 import com.best0167.lol.lolcustomrecord.domain.match.Matches;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Getter
-public class MatchesResponseDto {
+@RequiredArgsConstructor
+public class MatchesListResponseDto {
+
     private final Long id;
     private final int season;
     private final int day;
@@ -30,9 +34,9 @@ public class MatchesResponseDto {
     private final String redMidChampion;
     private final String redBotChampion;
     private final String redSupportChampion;
+    private final LocalDateTime modifiedDate;
 
-    @Builder
-    public MatchesResponseDto(Matches entity) {
+    public MatchesListResponseDto(Matches entity) {
         this.id = entity.getId();
         this.season = entity.getSeason();
         this.day = entity.getDay();
@@ -57,5 +61,6 @@ public class MatchesResponseDto {
         this.redMidChampion = entity.getRedMidChampion();
         this.redBotChampion = entity.getRedBotChampion();
         this.redSupportChampion = entity.getRedSupportChampion();
+        this.modifiedDate = entity.getModifiedDate();
     }
 }

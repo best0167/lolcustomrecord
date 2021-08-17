@@ -1,4 +1,4 @@
-package com.best0167.lol.lolcustomrecord.web.dto;
+package com.best0167.lol.lolcustomrecord.web.dto.posts;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.best0167.lol.lolcustomrecord.web.dto;
+package com.best0167.lol.lolcustomrecord.web.dto.matches;
 
 import com.best0167.lol.lolcustomrecord.domain.match.Matches;
 import lombok.Builder;

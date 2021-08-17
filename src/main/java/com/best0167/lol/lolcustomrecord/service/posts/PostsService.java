@@ -2,10 +2,10 @@ package com.best0167.lol.lolcustomrecord.service.posts;
 
 import com.best0167.lol.lolcustomrecord.domain.posts.Posts;
 import com.best0167.lol.lolcustomrecord.domain.posts.PostsRepository;
-import com.best0167.lol.lolcustomrecord.web.dto.PostsListResponseDto;
-import com.best0167.lol.lolcustomrecord.web.dto.PostsResponseDto;
-import com.best0167.lol.lolcustomrecord.web.dto.PostsSaveRequestDto;
-import com.best0167.lol.lolcustomrecord.web.dto.PostsUpdateRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.posts.PostsListResponseDto;
+import com.best0167.lol.lolcustomrecord.web.dto.posts.PostsResponseDto;
+import com.best0167.lol.lolcustomrecord.web.dto.posts.PostsSaveRequestDto;
+import com.best0167.lol.lolcustomrecord.web.dto.posts.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
