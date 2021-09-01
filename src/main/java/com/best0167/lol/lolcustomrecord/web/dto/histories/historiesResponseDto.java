@@ -9,13 +9,21 @@ import lombok.NoArgsConstructor;
 public class historiesResponseDto {
 
     private int season;
-    private int total;
+    private int day;
+    private String line;
+    private String champion;
+    private int victory;
+    private int defeat;
     private int score;
 
     @Builder
-    public historiesResponseDto(int season, int total, int score) {
+    public historiesResponseDto(int season, int day, String line, String champion, int victory, int defeat, int score) {
         this.season = season;
-        this.total = total;
+        this.day = day;
+        this.line = line;
+        this.champion = champion;
+        this.victory = victory;
+        this.defeat = defeat;
         this.score = score;
     }
 
