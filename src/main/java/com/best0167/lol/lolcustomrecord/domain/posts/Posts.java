@@ -1,6 +1,7 @@
 package com.best0167.lol.lolcustomrecord.domain.posts;
 
 import com.best0167.lol.lolcustomrecord.domain.BaseTimeEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,9 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Builder
 public class Posts extends BaseTimeEntity {
 
     @Id
@@ -23,13 +26,6 @@ public class Posts extends BaseTimeEntity {
     private String content;
 
     private String author;
-
-    @Builder
-    public Posts(String title, String content, String author) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
-    }
 
     public void update(String title, String content) {
         this.title = title;

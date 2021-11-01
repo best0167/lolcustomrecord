@@ -2,6 +2,7 @@ package com.best0167.lol.lolcustomrecord.service.participants;
 
 import com.best0167.lol.lolcustomrecord.domain.participant.Participants;
 import com.best0167.lol.lolcustomrecord.domain.participant.ParticipantsRepository;
+import com.best0167.lol.lolcustomrecord.exception.LCustomException;
 import com.best0167.lol.lolcustomrecord.web.dto.participants.ParticipantsListResponseDto;
 import com.best0167.lol.lolcustomrecord.web.dto.participants.ParticipantsResponseDto;
 import com.best0167.lol.lolcustomrecord.web.dto.participants.ParticipantsSaveRequestDto;
@@ -10,8 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.best0167.lol.lolcustomrecord.exception.LCustomErrorCode.DUPLICATED_NAME;
 
 @RequiredArgsConstructor
 @Service
@@ -21,7 +25,16 @@ public class ParticipantsService {
 
     @Transactional
     public Long save(ParticipantsSaveRequestDto requestDto) {
+        validateCreateParticipantRequest(requestDto);
+
         return participantsRepository.save(requestDto.toEntity()).getId();
+    }
+
+    private void validateCreateParticipantRequest(@NotNull ParticipantsSaveRequestDto requestDto) {
+        participantsRepository.findByName(requestDto.getName())
+                .ifPresent((participants -> {
+                    throw new LCustomException(DUPLICATED_NAME);
+                }));
     }
 
     @Transactional

@@ -1,6 +1,7 @@
 package com.best0167.lol.lolcustomrecord.domain.user;
 
 import com.best0167.lol.lolcustomrecord.domain.BaseTimeEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class User extends BaseTimeEntity {
 
@@ -28,14 +31,6 @@ public class User extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
-
-    @Builder
-    public User(String name, String email, String picture, Role role) {
-        this.name = name;
-        this.email = email;
-        this.picture = picture;
-        this.role = role;
-    }
 
     public User update(String name, String picture) {
         this.name = name;

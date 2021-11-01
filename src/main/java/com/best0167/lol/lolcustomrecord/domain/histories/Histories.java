@@ -1,6 +1,8 @@
 package com.best0167.lol.lolcustomrecord.domain.histories;
 
 import com.best0167.lol.lolcustomrecord.domain.BaseTimeEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +10,8 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Histories extends BaseTimeEntity {
 

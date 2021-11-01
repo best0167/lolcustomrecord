@@ -1,6 +1,7 @@
 package com.best0167.lol.lolcustomrecord.domain.match;
 
 import com.best0167.lol.lolcustomrecord.domain.BaseTimeEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Matches extends BaseTimeEntity {
 
@@ -85,32 +88,6 @@ public class Matches extends BaseTimeEntity {
     @Column(nullable = false)
     private String redSupportChampion;
 
-    @Builder
-    public Matches(int season, int day, String victoryTeam, String blueTopNickname, String blueJungleNickname, String blueMidNickname, String blueBotNickname, String blueSupportNickname, String redTopNickname, String redJungleNickname, String redMidNickname, String redBotNickname, String redSupportNickname, String blueTopChampion, String blueJungleChampion, String blueMidChampion, String blueBotChampion, String blueSupportChampion, String redTopChampion, String redJungleChampion, String redMidChampion, String redBotChampion, String redSupportChampion) {
-        this.season = season;
-        this.day = day;
-        this.victoryTeam = victoryTeam;
-        this.blueTopNickname = blueTopNickname;
-        this.blueJungleNickname = blueJungleNickname;
-        this.blueMidNickname = blueMidNickname;
-        this.blueBotNickname = blueBotNickname;
-        this.blueSupportNickname = blueSupportNickname;
-        this.redTopNickname = redTopNickname;
-        this.redJungleNickname = redJungleNickname;
-        this.redMidNickname = redMidNickname;
-        this.redBotNickname = redBotNickname;
-        this.redSupportNickname = redSupportNickname;
-        this.blueTopChampion = blueTopChampion;
-        this.blueJungleChampion = blueJungleChampion;
-        this.blueMidChampion = blueMidChampion;
-        this.blueBotChampion = blueBotChampion;
-        this.blueSupportChampion = blueSupportChampion;
-        this.redTopChampion = redTopChampion;
-        this.redJungleChampion = redJungleChampion;
-        this.redMidChampion = redMidChampion;
-        this.redBotChampion = redBotChampion;
-        this.redSupportChampion = redSupportChampion;
-    }
 
     public void update(String victoryTeam, String blueTopChampion, String blueJungleChampion, String blueMidChampion, String blueBotChampion, String blueSupportChampion, String redTopChampion, String redJungleChampion, String redMidChampion, String redBotChampion, String redSupportChampion) {
         this.victoryTeam = victoryTeam;

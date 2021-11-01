@@ -1,6 +1,7 @@
 package com.best0167.lol.lolcustomrecord.domain.participant;
 
 import com.best0167.lol.lolcustomrecord.domain.BaseTimeEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Participants extends BaseTimeEntity {
     @Id
@@ -26,14 +29,6 @@ public class Participants extends BaseTimeEntity {
 
     @Column(nullable = false)
     private String lineTier;
-
-    @Builder
-    public Participants(String name, String afreecaId, String afreecaNickname, String lineTier) {
-        this.name = name;
-        this.afreecaId = afreecaId;
-        this.afreecaNickname = afreecaNickname;
-        this.lineTier = lineTier;
-    }
 
     public Participants update(String name, String afreecaId, String afreecaNickname, String lineTier) {
         this.name = name;
